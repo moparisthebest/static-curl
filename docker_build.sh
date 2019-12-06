@@ -1,10 +1,20 @@
 #!/bin/sh
 
-rm -rf /tmp/static-curl/
-mkdir -p /tmp/static-curl/
-cp build.sh mykey.asc /tmp/static-curl/
+DOCKER_IMAGE="$1"
+shift
+ARCH="$1"
+shift
+CURL_VERSION="$1"
 
-docker run -it --rm -v /tmp/static-curl:/tmp alpine /tmp/build.sh
+BUILD_DIR=/tmp/static-curl/
 
-mv /tmp/static-curl/curl .
-rm -rf /tmp/static-curl/
+rm -rf "$BUILD_DIR"
+mkdir -p "$BUILD_DIR"
+cp build.sh mykey.asc "$BUILD_DIR"
+
+docker run --rm -v "$BUILD_DIR":/tmp "$DOCKER_IMAGE" /tmp/build.sh "$CURL_VERSION" || exit 1
+
+mv "$BUILD_DIR"curl "./curl-$ARCH"
+rm -rf "$BUILD_DIR" 2>/dev/null
+
+exit 0

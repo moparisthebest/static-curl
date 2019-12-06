@@ -1,33 +1,26 @@
-dist: trusty
 language: minimal
 services: docker
-sudo: required
 
 env:
   global:
     - CURL_VERSION='7.67.0'
 
+matrix:
+  include:
+    - env: ARCH='amd64'   DOCKER_IMAGE='alpine'
+    - env: ARCH='i386'    DOCKER_IMAGE='i386/alpine'
+    - env: ARCH='aarch64' DOCKER_IMAGE='alpine'
+      arch: arm64
+
 script:
-  - bash docker_build.sh "$CURL_VERSION"
+  - ./docker_build.sh "$DOCKER_IMAGE" "$ARCH" "$CURL_VERSION"
 
 deploy:
-  # TODO update `api_key.secure`
-  # - Create a `public_repo` GitHub token. Go to: https://github.com/settings/tokens/new
-  # - Encrypt it: `travis encrypt 0123456789012345678901234567890123456789
-  # - Paste the output down here
   api_key:
     secure: $GITHUB_OAUTH
   file_glob: true
-  file: curl
+  file: curl*
   on:
     tags: true
   provider: releases
   skip_cleanup: true
-
-branches:
-  only:
-    # release tags
-    - /^v\d+\.\d+\.\d+.*$/
-    - master
-    - travis
-    - ci
