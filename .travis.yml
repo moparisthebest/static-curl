@@ -1,19 +1,19 @@
 language: minimal
 services: docker
 
-env:
-  global:
-    - CURL_VERSION='7.67.0'
-
 matrix:
   include:
     - env: ARCH='amd64'   DOCKER_IMAGE='alpine'
-    - env: ARCH='i386'    DOCKER_IMAGE='i386/alpine'
     - env: ARCH='aarch64' DOCKER_IMAGE='alpine'
       arch: arm64
+    - env: ARCH='i386'    DOCKER_IMAGE='multiarch/alpine:i386-latest-stable'
+#    - env: ARCH='x86'     DOCKER_IMAGE='multiarch/alpine:x86-latest-stable'
+    - env: ARCH='ppc64le' DOCKER_IMAGE='multiarch/alpine:ppc64le-latest-stable'
+#    - env: ARCH='armhf'   DOCKER_IMAGE='multiarch/alpine:armhf-latest-stable'
+    - env: ARCH='armv7'   DOCKER_IMAGE='multiarch/alpine:armv7-edge'
 
 script:
-  - ./docker_build.sh "$DOCKER_IMAGE" "$ARCH" "$CURL_VERSION"
+  - ./docker_build.sh "$DOCKER_IMAGE" "$ARCH"
 
 deploy:
   api_key:
