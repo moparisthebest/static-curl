@@ -16,8 +16,7 @@ script:
   - ./docker_build.sh "$DOCKER_IMAGE" "$ARCH"
 
 deploy:
-  api_key:
-    secure: $GITHUB_OAUTH
+  api_key: $GITHUB_OAUTH
   file_glob: true
   file: curl*
   on:
