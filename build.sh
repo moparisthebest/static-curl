@@ -6,7 +6,7 @@
 # docker run --rm -v $(pwd):/tmp i386/alpine /tmp/build.sh
 # docker run --rm -v $(pwd):/tmp ALPINE_IMAGE_HERE /tmp/build.sh
 
-CURL_VERSION='7.70.0'
+CURL_VERSION='7.71.0'
 
 [ "$1" != ""] && CURL_VERSION="$1"
 
