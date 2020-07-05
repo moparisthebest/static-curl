@@ -11,6 +11,7 @@ matrix:
     - env: ARCH='ppc64le' DOCKER_IMAGE='multiarch/alpine:ppc64le-latest-stable'
 #    - env: ARCH='armhf'   DOCKER_IMAGE='multiarch/alpine:armhf-latest-stable'
     - env: ARCH='armv7'   DOCKER_IMAGE='multiarch/alpine:armv7-edge'
+      arch: arm64
 
 script:
   - ./docker_build.sh "$DOCKER_IMAGE" "$ARCH"
