@@ -10,7 +10,7 @@ matrix:
 #    - env: ARCH='x86'     DOCKER_IMAGE='multiarch/alpine:x86-latest-stable'
     - env: ARCH='ppc64le' DOCKER_IMAGE='multiarch/alpine:ppc64le-latest-stable'
 #    - env: ARCH='armhf'   DOCKER_IMAGE='multiarch/alpine:armhf-latest-stable'
-    - env: ARCH='armv7'   DOCKER_IMAGE='multiarch/alpine:armv7-edge'
+    - env: ARCH='armv7'   DOCKER_IMAGE='multiarch/alpine:armv7-latest-stable'
       arch: arm64
 
 script:
