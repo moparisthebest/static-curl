@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/moparisthebest/static-curl/master/static-curl.svg?sanitize=true" alt="no not that kind" width="32" /> Static curl <img src="https://raw.githubusercontent.com/moparisthebest/static-curl/master/static-curl.svg?sanitize=true" alt="no not that kind" width="32" />
+:mechanical_arm: Static curl :mechanical_arm:
 -----------
 [![Travis-CI Build Status](https://api.travis-ci.org/moparisthebest/static-curl.svg?branch=master)](https://travis-ci.org/moparisthebest/static-curl)
 
@@ -20,4 +20,3 @@ File explanation:
   - [build.sh](build.sh) - runs inside an alpine docker container, downloads curl, verifies it with gpg, and builds it
   - [docker_build.sh](docker_build.sh) - runs build.sh inside docker
   - [mykey.asc](mykey.asc) - Daniel Stenberg's [GPG key](https://daniel.haxx.se/address.html) used for signing/verifying curl releases
-  - [bicep curl](https://thenounproject.com/term/curl/499187) by Laymik from [the Noun Project](https://thenounproject.com)
