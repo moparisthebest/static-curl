@@ -1,19 +1,15 @@
 #!/bin/sh
 
 # to test locally, run one of:
-# docker run --rm -v $(pwd):/tmp alpine /tmp/build.sh
-# docker run --rm -v $(pwd):/tmp multiarch/alpine:armhf-latest-stable /tmp/build.sh
-# docker run --rm -v $(pwd):/tmp i386/alpine /tmp/build.sh
-# docker run --rm -v $(pwd):/tmp ALPINE_IMAGE_HERE /tmp/build.sh
+# docker run --rm -v $(pwd):/tmp -w /tmp -e ARCH=amd64 alpine /tmp/build.sh
+# docker run --rm -v $(pwd):/tmp -w /tmp -e ARCH=aarch64 multiarch/alpine:aarch64-latest-stable /tmp/build.sh
+# docker run --rm -v $(pwd):/tmp -w /tmp -e ARCH=ARCH_HERE ALPINE_IMAGE_HERE /tmp/build.sh
 
 CURL_VERSION='7.73.0'
 
-[ "$1" != ""] && CURL_VERSION="$1"
+[ "$1" != "" ] && CURL_VERSION="$1"
 
 set -exu
-
-# change to the directory this script is in, we assume mykey.asc is there
-cd "$(dirname "$0")"
 
 if [ ! -f curl-${CURL_VERSION}.tar.gz ]
 then
@@ -63,5 +59,8 @@ ldd src/curl || true
 
 #./src/curl -v http://www.moparisthebest.com/; ./src/curl -v https://www.moparisthebest.com/ip
 
-# we only want to save curl here, by moving it to /tmp/ for now
-mv src/curl /tmp/
+# we only want to save curl here
+mkdir -p /tmp/release/
+mv src/curl "/tmp/release/curl-$ARCH"
+cd ..
+rm -rf "curl-${CURL_VERSION}/"

@@ -1,6 +1,6 @@
 :mechanical_arm: Static curl :mechanical_arm:
 -----------
-[![Travis-CI Build Status](https://api.travis-ci.org/moparisthebest/static-curl.svg?branch=master)](https://travis-ci.org/moparisthebest/static-curl)
+[![Build Status](https://ci.moparisthe.best/job/moparisthebest/job/static-curl/job/master/badge/icon%3Fstyle=plastic)](https://ci.moparisthe.best/job/moparisthebest/job/static-curl/job/master/)
 
 These are a couple simple scripts to build a fully static curl binary using alpine linux docker containers.  Currently it is a featureful build with OpenSSL, libssh2, nghttp2, and zlib, supporting most protocols.  Tweak configure options in [build.sh](build.sh#L50) if you need something else (and/or suggest or PR).
 
@@ -18,5 +18,4 @@ Development
 
 File explanation:
   - [build.sh](build.sh) - runs inside an alpine docker container, downloads curl, verifies it with gpg, and builds it
-  - [docker_build.sh](docker_build.sh) - runs build.sh inside docker
   - [mykey.asc](mykey.asc) - Daniel Stenberg's [GPG key](https://daniel.haxx.se/address.html) used for signing/verifying curl releases

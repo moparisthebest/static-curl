@@ -1,0 +1,43 @@
+properties(
+    [
+        disableConcurrentBuilds()
+    ]
+)
+
+node('linux && docker') {
+    try {
+    stage('Checkout') {
+        //branch name from Jenkins environment variables
+        echo "My branch is: ${env.BRANCH_NAME}"
+
+        // this doesn't grab tags pointing to this branch
+        //checkout scm
+        // this hack does... https://issues.jenkins.io/browse/JENKINS-45164
+        checkout([
+            $class: 'GitSCM',
+            branches: [[name: 'refs/heads/'+env.BRANCH_NAME]],
+            extensions: [[$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
+            userRemoteConfigs: scm.userRemoteConfigs,
+        ])
+        sh '''
+        set -euxo pipefail
+        git checkout "$BRANCH_NAME" --
+        git reset --hard "origin/$BRANCH_NAME"
+        '''
+    }
+
+    stage('Build + Deploy') {
+        sh 'curl --compressed -sL https://code.moparisthebest.com/moparisthebest/self-ci/raw/branch/master/build-ci.sh | bash -s -- -l c -b ./build.sh'
+    }
+
+        currentBuild.result = 'SUCCESS'
+    } catch (Exception err) {
+        currentBuild.result = 'FAILURE'
+    } finally {
+        stage('Email') {
+            step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'admin.jenkins@moparisthebest.com', sendToIndividuals: true])
+        }
+        sh './bin/build.sh docker-chown'
+        deleteDir()
+    }
+}
