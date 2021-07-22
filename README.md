@@ -4,12 +4,12 @@
 
 These are a couple simple scripts to build a fully static curl binary using alpine linux docker containers.  Currently it is a featureful build with OpenSSL, libssh2, nghttp2, and zlib, supporting most protocols.  Tweak configure options in [build.sh](build.sh#L50) if you need something else (and/or suggest or PR).
 
-Grab the latest release (curl 7.78.0) from one of these links, by CPU architecture:
-  - [curl-amd64](https://github.com/moparisthebest/static-curl/releases/download/v7.78.0/curl-amd64)
-  - [curl-i386](https://github.com/moparisthebest/static-curl/releases/download/v7.78.0/curl-i386)
-  - [curl-aarch64](https://github.com/moparisthebest/static-curl/releases/download/v7.78.0/curl-aarch64)
-  - [curl-armv7](https://github.com/moparisthebest/static-curl/releases/download/v7.78.0/curl-armv7)
-  - [curl-ppc64le](https://github.com/moparisthebest/static-curl/releases/download/v7.78.0/curl-ppc64le)
+Grab the [latest release](https://github.com/moparisthebest/static-curl/releases/latest) from one of these links, by CPU architecture:
+  - [curl-amd64](https://github.com/moparisthebest/static-curl/releases/latest/download/curl-amd64)
+  - [curl-i386](https://github.com/moparisthebest/static-curl/releases/latest/download/curl-i386)
+  - [curl-aarch64](https://github.com/moparisthebest/static-curl/releases/latest/download/curl-aarch64)
+  - [curl-armv7](https://github.com/moparisthebest/static-curl/releases/latest/download/curl-armv7)
+  - [curl-ppc64le](https://github.com/moparisthebest/static-curl/releases/latest/download/curl-ppc64le)
 
 Static binaries for windows are provided directly by [curl](https://curl.haxx.se/windows/) itself.
 
