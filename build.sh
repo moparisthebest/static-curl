@@ -5,7 +5,7 @@
 # docker run --rm -v $(pwd):/tmp -w /tmp -e ARCH=aarch64 multiarch/alpine:aarch64-latest-stable /tmp/build.sh
 # docker run --rm -v $(pwd):/tmp -w /tmp -e ARCH=ARCH_HERE ALPINE_IMAGE_HERE /tmp/build.sh
 
-CURL_VERSION='7.78.0'
+CURL_VERSION='7.79.0'
 
 [ "$1" != "" ] && CURL_VERSION="$1"
 
@@ -40,18 +40,18 @@ apk add openssl-libs-static zlib-static || true
 # gcc is apparantly incapable of building a static binary, even gcc -static helloworld.c ends up linked to libc, instead of solving, use clang
 export CC=clang
 
-# temp patch so it will build statically https://github.com/curl/curl/pull/7476
-patch -p1 < ../static.patch
-apk add autoconf automake libtool
-autoreconf -fi
-# end temp patch
+# apply patches if needed
+#patch -p1 < ../static.patch
+#apk add autoconf automake libtool
+#autoreconf -fi
+# end apply patches
 
 # set up any required curl options here
 #LDFLAGS="-static" PKG_CONFIG="pkg-config --static" ./configure --disable-shared --enable-static --disable-libcurl-option --without-brotli --disable-manual --disable-unix-sockets --disable-dict --disable-file --disable-gopher --disable-imap --disable-smtp --disable-rtsp --disable-telnet --disable-tftp --disable-pop3 --without-zlib --disable-threaded-resolver --disable-ipv6 --disable-smb --disable-ntlm-wb --disable-tls-srp --disable-crypto-auth --without-ngtcp2 --without-nghttp2 --disable-ftp --disable-mqtt --disable-alt-svc --without-ssl
 
 LDFLAGS="-static" PKG_CONFIG="pkg-config --static" ./configure --disable-shared --enable-static --disable-ldap --enable-ipv6 --enable-unix-sockets --with-ssl --with-libssh2
 
-make -j4 V=1 curl_LDFLAGS=-all-static
+make -j4 V=1 LDFLAGS="-static -all-static"
 
 # binary is ~13M before stripping, 2.6M after
 strip src/curl
