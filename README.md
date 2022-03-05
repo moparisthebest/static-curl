@@ -9,6 +9,7 @@ Grab the [latest release](https://github.com/moparisthebest/static-curl/releases
   - [curl-i386](https://github.com/moparisthebest/static-curl/releases/latest/download/curl-i386)
   - [curl-aarch64](https://github.com/moparisthebest/static-curl/releases/latest/download/curl-aarch64)
   - [curl-armv7](https://github.com/moparisthebest/static-curl/releases/latest/download/curl-armv7)
+  - [curl-armhf](https://github.com/moparisthebest/static-curl/releases/latest/download/curl-armhf)
   - [curl-ppc64le](https://github.com/moparisthebest/static-curl/releases/latest/download/curl-ppc64le)
 
 Static binaries for windows are provided directly by [curl](https://curl.haxx.se/windows/) itself.
