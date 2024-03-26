@@ -5,7 +5,7 @@
 # docker run --rm -v $(pwd):/tmp -w /tmp -e ARCH=aarch64 multiarch/alpine:aarch64-latest-stable /tmp/build.sh
 # docker run --rm -v $(pwd):/tmp -w /tmp -e ARCH=ARCH_HERE ALPINE_IMAGE_HERE /tmp/build.sh
 
-CURL_VERSION='8.5.0'
+CURL_VERSION='8.6.0'
 
 [ "$1" != "" ] && CURL_VERSION="$1"
 
